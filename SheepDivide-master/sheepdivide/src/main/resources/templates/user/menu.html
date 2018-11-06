@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SheepDivide</title>
+    <!--<link rel="stylesheet" href="/static/styles.css"/>-->
+    <style>
+        /* CSS Dokument */
+
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+        @import url(https://fonts.googleapis.com/css?family=Bree+Serif);
+
+        body {
+            background: #212121;
+            font-size:22px;
+            line-height: 32px;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            word-wrap:break-word !important;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        h1 {
+            font-size: 60px;
+            text-align: center;
+            color: #FFF;
+        }
+
+        h3 {
+            font-size: 30px;
+            line-height: 34px;
+            text-align: center;
+            color: #FFF;
+        }
+
+        h3 a {
+            color: #FFF;
+        }
+
+        a {
+            color: #FFF;
+        }
+
+        h1 {
+            margin-top: 100px;
+            text-align:center;
+            font-size:60px;
+            line-height: 70px;
+            font-family: 'Bree Serif', 'serif';
+        }
+
+        #container {
+            margin: 0 auto;
+            max-width: 890px;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .toggle,
+        [id^=drop] {
+            display: none;
+        }
+
+        /* Background-color nav container. */
+        nav {
+            margin:0;
+            padding: 0;
+            background-color: #254441;
+        }
+
+        #logo {
+            display: block;
+            padding: 0 30px;
+            float: left;
+            font-size:20px;
+            line-height: 60px;
+            word-wrap:break-word !important;
+            font-family: 'Bree Serif', 'serif';
+        }
+
+        /* Siden vi har en "ul li" "float:left"
+         * Er vi nødtil at clear efter container. */
+
+        nav:after {
+            content:"";
+            display:table;
+            clear:both;
+        }
+
+        /* Fjern padding, margin og "list-style" fra "ul",
+         *  og tilføjer "position:reltive" */
+        nav ul {
+            float: right;
+            padding:0;
+            margin:0;
+            list-style: none;
+            position: relative;
+        }
+
+        /* Placering af navigation elementer inline */
+        nav ul li {
+            margin: 0px;
+            display:inline-block;
+            float: left;
+            background-color: #254441;
+        }
+
+        /* Styling links */
+        nav a {
+            display:block;
+            padding:14px 20px;
+            color:#FFF;
+            font-size:17px;
+            text-decoration:none;
+        }
+
+
+        nav ul li ul li:hover { background: #000000; }
+
+        /* Background color skifter on Hover */
+        nav a:hover {
+            background-color: #000000;
+        }
+
+        /* Gem Dropdowns Standard
+         * Og giv den en position absolute */
+        nav ul ul {
+            display: none;
+            position: absolute;
+            top: 60px;
+        }
+
+        /* Display Dropdowns on Hover */
+        nav ul li:hover > ul {
+            display:inherit;
+        }
+
+        /* Dropdown */
+        nav ul ul li {
+            width:170px;
+            float:none;
+            display:list-item;
+            position: relative;
+        }
+
+
+        li > a:after { content:  ' +'; }
+        li > a:only-child:after { content: ''; }
+
+
+        @media all and (max-width : 768px) {
+
+            #logo {
+                display: block;
+                padding: 0;
+                width: 100%;
+                text-align: center;
+                float: none;
+            }
+
+            nav {
+                margin: 0;
+            }
+
+            /* Gem navigation menu Standard */
+            .toggle + a,
+            .menu {
+                display: none;
+            }
+
+            /* Stylinf toggle lable */
+            .toggle {
+                display: block;
+                background-color: #254441;
+                padding:14px 20px;
+                color:#FFF;
+                font-size:17px;
+                text-decoration:none;
+                border:none;
+            }
+
+            .toggle:hover {
+                background-color: #000000;
+            }
+
+            /* Display Dropdown når man trykker på parent Lable */
+            [id^=drop]:checked + ul {
+                display: block;
+            }
+
+            /* Skift menu elementets width til 100% */
+            nav ul li {
+                display: block;
+                width: 100%;
+            }
+
+            nav ul ul .toggle,
+            nav ul ul a {
+                padding: 0 40px;
+            }
+
+            nav ul ul ul a {
+                padding: 0 80px;
+            }
+
+            nav a:hover,
+            nav ul ul ul a {
+                background-color: #000000;
+            }
+
+            nav ul li ul li .toggle,
+            nav ul ul a,
+            nav ul ul ul a{
+                padding:14px 20px;
+                color:#FFF;
+                font-size:17px;
+            }
+
+
+            nav ul li ul li .toggle,
+            nav ul ul a {
+                background-color: #212121;
+            }
+
+            /* Gem Dropdowns standard */
+            nav ul ul {
+                float: none;
+                position:static;
+                color: #ffffff;
+            }
+
+            /* Gem menus on hover */
+            nav ul ul li:hover > ul,
+            nav ul li:hover > ul {
+                display: none;
+            }
+
+            nav ul ul li {
+                display: block;
+                width: 100%;
+            }
+
+            nav ul ul ul li {
+                position: static;
+
+            }
+
+        }
+
+        @media all and (max-width : 330px) {
+
+            nav ul li {
+                display:block;
+                width: 94%;
+            }
+
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div id="logo">SheepDivide</div>
+
+    <label for="drop" class="toggle">Menu</label>
+    <input type="checkbox" id="drop" />
+    <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li>
+            <!-- Dropdown menu -->
+            <label for="drop-1" class="toggle">Indstil af setup +</label>
+            <a href="Indstil">Indstil af setup</a>
+            <input type="checkbox" id="drop-1"/>
+            <ul>
+                <li><a href="OversigtMarker">Vis oversigt af marker</a></li>
+                <li><a href="RegistrerSheep">Registrer får</a></li>
+                <li><a href="RedigerSheep">Rediger får</a></li>
+                <li><a href="OpdelSheep">Opdel får</a></li>
+            </ul>
+
+        </li>
+        <li><a href="VisData">Vis data</a></li>
+        <li><a href="logOut">Log out</a></li>
+    </ul>
+</nav>
+
+
+<h1> Webapp SheepDivide</h1>
+
+</body>
+</html>

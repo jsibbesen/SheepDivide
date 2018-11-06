@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login page</title>
+    <style>
+        /* CSS Dokument */
+
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+        @import url(https://fonts.googleapis.com/css?family=Bree+Serif);
+
+
+        body {
+            background: #212121;
+            line-height: 32px;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            word-wrap:break-word !important;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        /* index background billede */
+        .wrapper {
+          /*  background-image: url(https://cdn.pixabay.com/photo/2016/09/03/22/19/sheep-1642874_960_720.jpg); */
+
+            background-position: center center;
+
+            background-repeat: no-repeat;
+
+            background-attachment: fixed;
+
+            background-size: cover;
+
+            height: 750px;
+
+
+        }
+
+
+
+        /* For mobile  */
+        @media only screen and (max-width: 767px) {
+            .wrapper {
+
+                background-image: url(https://cdn.pixabay.com/photo/2016/09/03/22/19/sheep-1642874_960_720.jpg);
+
+                height: 100%;
+            }
+
+
+        }
+
+        h1 {
+            margin-top: 30px;
+            font-size: 52px;
+            line-height: 52px;
+            text-align: center;
+            color: #FFF;
+            font-family: 'Bree Serif', 'serif';
+            text-align:center;
+        }
+
+        h3 {
+            font-size: 17px;
+            line-height: 25px;
+            text-align: center;
+            color: #FFF;
+        }
+
+        h3 a {
+            color: #FFF;
+        }
+
+        h2 {
+            margin-top: 10px;
+            text-align:center;
+            font-size:30px;
+            line-height: 30px;
+            font-family: 'Bree Serif', 'serif';
+        }
+
+        /* Login starter */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        *:focus {
+            outline: none;
+        }
+
+        .login {
+            margin: 15px auto;
+            width: 300px;
+        }
+        .login-screen {
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 5px
+        }
+
+        .app-title {
+            text-align: center;
+            color: #777;
+        }
+
+        .login-form {
+            text-align: center;
+        }
+        .control-group {
+            margin-bottom: 10px;
+        }
+
+        input {
+            text-align: center;
+            background-color: #ECF0F1;
+            border: 2px solid transparent;
+            border-radius: 3px;
+            font-size: 16px;
+            font-weight: 200;
+            padding: 10px 0;
+            width: 250px;
+            transition: border .5s;
+        }
+
+        input:focus {
+            border: 2px solid #3498DB;
+            box-shadow: none;
+        }
+
+        .btn {
+            border: 2px solid transparent;
+            background: #254441;
+            color: #ffffff;
+            font-size: 16px;
+            line-height: 25px;
+            padding: 10px 0;
+            text-decoration: none;
+            text-shadow: none;
+            border-radius: 3px;
+            box-shadow: none;
+            transition: 0.25s;
+            display: block;
+            width: 250px;
+            margin: 0 auto;
+        }
+
+        .btn:hover {
+            background-color: #416d69;
+        }
+
+        .login-link {
+            font-size: 12px;
+            color: #444;
+            display: block;
+            margin-top: 12px;
+        }
+
+
+
+        /* Menu starter */
+        a {
+            color: #FFF;
+        }
+
+
+        #container {
+            margin: 0 auto;
+            max-width: 890px;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .toggle,
+        [id^=drop] {
+            display: none;
+        }
+
+        /* Background-color nav container. */
+        nav {
+            margin:0;
+            padding: 0;
+            background-color: #254441;
+        }
+
+        #logo {
+            display: block;
+            padding: 0 30px;
+            float: left;
+            font-size:20px;
+            line-height: 60px;
+            word-wrap:break-word !important;
+            font-family: 'Bree Serif', 'serif';
+        }
+
+        /* Siden vi har en "ul li" "float:left"
+         * Er vi nødtil at clear efter container. */
+
+        nav:after {
+            content:"";
+            display:table;
+            clear:both;
+        }
+
+        /* Fjern padding, margin og "list-style" fra "ul",
+         *  og tilføjer "position:reltive" */
+        nav ul {
+            float: right;
+            padding:0;
+            margin:0;
+            list-style: none;
+            position: relative;
+        }
+
+        /* Placering af navigation elementer inline */
+        nav ul li {
+            margin: 0px;
+            display:inline-block;
+            float: left;
+            background-color: #254441;
+        }
+
+        /* Styling links */
+        nav a {
+            display:block;
+            padding:14px 20px;
+            color:#FFF;
+            font-size:17px;
+            text-decoration:none;
+        }
+
+
+        nav ul li ul li:hover { background: #000000; }
+
+        /* Background color skifter on Hover */
+        nav a:hover {
+            background-color: #000000;
+        }
+
+        /* Gem Dropdowns Standard
+         * Og giv den en position absolute */
+        nav ul ul {
+            display: none;
+            position: absolute;
+            top: 60px;
+        }
+
+        /* Display Dropdowns on Hover */
+        nav ul li:hover > ul {
+            display:inherit;
+        }
+
+        /* Dropdown */
+        nav ul ul li {
+            width:170px;
+            float:none;
+            display:list-item;
+            position: relative;
+        }
+
+
+        li > a:after { content:  ' +'; }
+        li > a:only-child:after { content: ''; }
+
+        /* Media mobile */
+        @media all and (max-width : 768px) {
+
+            #logo {
+                display: block;
+                padding: 0;
+                width: 100%;
+                text-align: center;
+                float: none;
+            }
+
+            nav {
+                margin: 0;
+            }
+
+            /* Gem navigation menu Standard */
+            .toggle + a,
+            .menu {
+                display: none;
+            }
+
+            /* Stylinf toggle lable */
+            .toggle {
+                display: block;
+                background-color: #254441;
+                padding:14px 20px;
+                color:#FFF;
+                font-size:17px;
+                text-decoration:none;
+                border:none;
+            }
+
+            .toggle:hover {
+                background-color: #000000;
+            }
+
+            /* Display Dropdown når man trykker på parent Lable */
+            [id^=drop]:checked + ul {
+                display: block;
+                width: 100%;
+            }
+
+            /* Skift menu elementets width til 100% */
+            nav ul li {
+                display: block;
+                width: 100%;
+            }
+
+            nav ul ul .toggle,
+            nav ul ul a {
+                padding: 0 40px;
+            }
+
+            nav ul ul ul a {
+                padding: 0 80px;
+            }
+
+
+            nav a:hover,
+            nav ul ul ul a {
+                background-color: #000000;
+            }
+
+
+            nav ul li ul li .toggle,
+            nav ul ul a,
+            nav ul ul ul a{
+                padding:14px 20px;
+                color:#FFF;
+                font-size:17px;
+            }
+
+
+            nav ul li ul li .toggle,
+            nav ul ul a {
+                background-color: #212121;
+            }
+
+
+            /* Gem Dropdowns standard */
+
+            nav ul ul {
+                float: none;
+                position:static;
+                color: #ffffff;
+            }
+
+            /* Gem menus on hover */
+
+            nav ul ul li:hover > ul,
+            nav ul li:hover > ul {
+                display: none;
+            }
+
+            nav ul ul li {
+                display: block;
+                width: 100%;
+            }
+
+            nav ul ul ul li {
+                position: static;
+
+            }
+
+        }
+
+        @media all and (max-width : 330px) {
+
+            nav ul li {
+                display:block;
+                width: 94%;
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <nav>
+
+<div id="logo">SheepDivide</div>
+
+    </nav>
+
+
+    <h1>Velkommen til SheepDivide webapp</h1>
+
+<!--<p th:if="${loginError}" class="error">Wrong user or password</p>-->
+    <form th:action="@{/login.html}" method="post">
+    <div class="login">
+        <div class="login-screen">
+            <div class="login-form">
+    <label for="username">Username</label>:
+    <input type="text" id="username" placeholder="Username" name="username" autofocus="autofocus" /> <br />
+                <div class="control-group">
+    <label for="password">Password</label>:
+    <input type="password" id="password" placeholder="Password" name="password" /> <br />
+                </div>
+    <input type="submit" value="Log in" />
+            </div>
+</div>
+</div>
+</form>
+
+</div>
+</body>
+</html>
